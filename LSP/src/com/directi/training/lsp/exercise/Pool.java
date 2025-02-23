@@ -5,23 +5,29 @@ public class Pool
     public void run()
     {
         Duck donaldDuck = new Duck();
-        Duck electricDuck = new ElectronicDuck();
-        quack(donaldDuck, electricDuck);
-        swim(donaldDuck, electricDuck);
+        ElectronicDuck electricDuck = new ElectronicDuck();
+        
+        electricDuck.turnOn();
+        
+        quackAndSwim(donaldDuck);
+        quackAndSwim(electricDuck);
+        
+        demonstratePoweredDuck(electricDuck);
     }
 
-    private void quack(Duck... ducks)
+    private void quackAndSwim(IDuck duck)
     {
-        for (Duck duck : ducks) {
-            duck.quack();
-        }
+        duck.quack();
+        duck.swim();
     }
-
-    private void swim(Duck... ducks)
+    
+    private void demonstratePoweredDuck(ElectronicDuck duck)
     {
-        for (Duck duck : ducks) {
-            duck.swim();
-        }
+        System.out.println("\nDemonstrating powered duck:");
+        duck.turnOff();
+        duck.quack();
+        duck.turnOn();
+        duck.quack();
     }
 
     public static void main(String[] args)

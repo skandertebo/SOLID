@@ -40,3 +40,23 @@ The code was refactored to use an abstract base class and inheritance:
 4. New resource types can be added by creating new classes without modifying existing code
 
 This makes the code open for extension (new resource types) but closed for modification.
+
+# Liskov Substitution Principle (LSP) Solution
+
+## Problem Identification
+The original code violated the Liskov Substitution Principle in the following ways:
+
+1. `ElectronicDuck` inherits from `Duck` but cannot fulfill the base class contract:
+   - It cannot be substituted for `Duck` without breaking the application
+
+2. The `Pool` class assumes all ducks can swim and quack at any time, which isn't true for electronic ducks
+
+## Solution
+The code was refactored to:
+
+1. Create an interface for the basic duck behavior
+2. Separate the power-dependent behavior into a separate interface
+3. Make electronic duck implement both interfaces
+4. Update the Pool class to work with the correct abstraction level
+
+This ensures that any type of duck can be safely substituted where its interface is expected.
