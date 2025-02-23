@@ -1,8 +1,6 @@
 package com.directi.training.isp.exercise;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
-public class SensingDoor implements Door
+public class SensingDoor implements Door, ProximitySensor
 {
     private boolean _locked;
     private boolean _opened;

@@ -60,3 +60,26 @@ The code was refactored to:
 4. Update the Pool class to work with the correct abstraction level
 
 This ensures that any type of duck can be safely substituted where its interface is expected.
+
+# Interface Segregation Principle (ISP) Solution
+
+## Problem Identification
+The original code violated the Interface Segregation Principle in the following ways:
+
+1. The `Door` interface was too broad, containing methods for multiple responsibilities:
+   - Basic door operations (lock, unlock, open, close)
+   - Timer callbacks (timeOutCallback)
+   - Proximity sensor callbacks (proximityCallback)
+
+2. Classes were forced to implement methods they didn't use:
+   - `SensingDoor` had to implement `timeOutCallback` with an exception
+   - `TimedDoor` had to implement `proximityCallback` with an exception
+
+## Solution
+The code was refactored by splitting the `Door` interface into smaller, more focused interfaces:
+
+1. `Door` - Basic door operations
+2. `TimerClient` - Timer callback functionality
+3. `ProximitySensor` - Proximity sensor functionality
+
+This ensures that classes only need to implement the interfaces relevant to their behavior.
