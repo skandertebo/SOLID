@@ -37,12 +37,6 @@ public class SensingDoor implements Door, ProximitySensor
     }
 
     @Override
-    public void timeOutCallback()
-    {
-        throw new NotImplementedException();
-    }
-
-    @Override
     public void proximityCallback()
     {
         _opened = true;

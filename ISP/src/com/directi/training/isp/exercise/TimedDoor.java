@@ -42,10 +42,4 @@ public class TimedDoor implements Door, TimerClient
     {
         _locked = true;
     }
-
-    @Override
-    public void proximityCallback()
-    {
-        throw new NotImplementedException();
-    }
 }
