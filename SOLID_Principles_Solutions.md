@@ -83,3 +83,30 @@ The code was refactored by splitting the `Door` interface into smaller, more foc
 3. `ProximitySensor` - Proximity sensor functionality
 
 This ensures that classes only need to implement the interfaces relevant to their behavior.
+
+# Dependency Inversion Principle (DIP) Solution
+
+## Problem Identification
+The original code violated the Dependency Inversion Principle in the following ways:
+
+1. The `EncodingModule` class had direct dependencies on concrete implementations:
+   - File I/O classes (FileReader, FileWriter)
+   - Network classes (URL, InputStream)
+   - Database class (MyDatabase)
+
+2. The class was tightly coupled to:
+   - Specific file paths
+   - Network protocols and URLs
+   - Database implementation
+
+## Solution
+The code was refactored to:
+
+1. Create abstractions for:
+   - Reading and writing data
+   - Database operations
+2. Make the `EncodingModule` depend on these abstractions
+3. Implement concrete classes for different data sources
+4. Use dependency injection to provide the concrete implementations
+
+This removes dependency on concrete implementations
