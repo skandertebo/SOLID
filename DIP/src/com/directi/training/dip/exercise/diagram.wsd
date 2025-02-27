@@ -1,0 +1,60 @@
+@startuml DIP
+interface IReader {
+    +read() : String
+}
+
+interface IWriter {
+    +write(data: String) : void
+}
+
+class FileReader {
+    -filePath : String
+    +FileReader(filePath: String)
+    +read() : String
+}
+
+class FileWriter {
+    -filePath : String
+    +FileWriter(filePath: String)
+    +write(data: String) : void
+}
+
+class NetworkReader {
+    -url : String
+    +NetworkReader(url: String)
+    +read() : String
+}
+
+class MyDatabase {
+    -_data : Map<Integer, String>
+    -_count : int
+    +write(inputString: String) : int
+}
+
+class DatabaseWriter {
+    -database: MyDatabase
+    +DatabaseWriter(database: MyDatabase)
+    +write(data: String) : void
+}
+
+class EncodingModule {
+    -reader: IReader
+    -writer: IWriter
+    +EncodingModule(reader: IReader, writer: IWriter)
+    +encode() : void
+}
+
+class EncodingModuleClient {
+    +main(args: String[]) : void
+}
+
+IReader <|.. FileReader
+IReader <|.. NetworkReader
+IWriter <|.. FileWriter
+IWriter <|.. DatabaseWriter
+
+DatabaseWriter --> MyDatabase
+EncodingModule --> IReader
+EncodingModule --> IWriter
+EncodingModuleClient --> EncodingModule
+@enduml

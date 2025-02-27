@@ -1,0 +1,41 @@
+@startuml SRP
+class Car {
+    - id : String
+    - model : String
+    - brand : String
+    + getId() : String
+    + getModel() : String
+    + getBrand() : String
+}
+
+class CarFormatter {
+    + getCarNames(cars: List<Car>) : String
+}
+
+class CarManager {
+    - carRepository : CarRepository
+    - carFormatter : CarFormatter
+    - carRanker : CarRanker
+    + getFromDb(carId: String) : Car
+    + getCarsNames() : String
+    + getBestCar() : Car
+}
+
+class CarRanker {
+    + getBestCar(cars: List<Car>) : Car
+}
+
+class CarRepository {
+    - carsDb : List<Car>
+    + findById(carId: String) : Car
+    + getAllCars() : List<Car>
+}
+
+CarManager --> CarRepository
+CarManager --> CarFormatter
+CarManager --> CarRanker
+CarFormatter --> Car
+CarRanker --> Car
+CarRepository --> Car
+
+@enduml

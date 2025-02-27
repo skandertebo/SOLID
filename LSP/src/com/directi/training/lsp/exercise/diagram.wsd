@@ -1,0 +1,36 @@
+@startuml LSP
+interface IDuck {
+    +quack() : void
+    +swim() : void
+}
+
+interface IPoweredDevice {
+    +turnOn() : void
+    +turnOff() : void
+    +isOn() : boolean
+}
+
+class Duck implements IDuck {
+    +quack() : void
+    +swim() : void
+}
+
+class ElectronicDuck implements IDuck, IPoweredDevice {
+    -_on : boolean
+    +quack() : void
+    +swim() : void
+    +turnOn() : void
+    +turnOff() : void
+    +isOn() : boolean
+}
+
+
+class Pool {
+    +run() : void
+    +quackAndSwim(duck: IDuck) : void
+    +demonstratePoweredDuck(duck: ElectronicDuck) : void
+}
+
+Pool --> Duck
+Pool --> ElectronicDuck
+@enduml

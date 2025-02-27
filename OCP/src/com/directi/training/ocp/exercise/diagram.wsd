@@ -1,0 +1,35 @@
+@startuml OCP
+abstract class Resource {
+    - id : int
+    + allocate() : int
+    + free() : void
+    + markBusy(resourceId: int) : void
+    + markFree(resourceId: int) : void
+    + findFree() : int
+}
+
+class ResourceAllocator {
+    - INVALID_RESOURCE_ID : int
+    + allocate(resource: Resource) : int
+    + free(resource: Resource) : void
+}
+
+class SpaceSlotResource extends Resource {
+    + allocate() : int
+    + free() : void
+    + markBusy(resourceId: int) : void
+    + markFree(resourceId: int) : void
+    + findFree() : int
+}
+
+class TimeSlotResource extends Resource {
+    + allocate() : int
+    + free() : void
+    + markBusy(resourceId: int) : void
+    + markFree(resourceId: int) : void
+    + findFree() : int
+}
+
+ResourceAllocator --> Resource
+
+@enduml

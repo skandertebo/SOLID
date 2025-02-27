@@ -1,0 +1,52 @@
+@startuml ISP 
+interface Door {
+    +lock() : void
+    +unlock() : void
+    +open() : void
+    +close() : void
+}
+
+interface ProximitySensor {
+    +proximityCallback() : void
+}
+
+interface TimerClient {
+    +timeOutCallback() : void
+}
+
+class SensingDoor implements Door, ProximitySensor {
+    -_locked : boolean
+    -_opened : boolean
+    +SensingDoor(sensor: Sensor)
+    +lock() : void
+    +unlock() : void
+    +open() : void
+    +close() : void
+    +proximityCallback() : void
+}
+
+class Sensor {
+    +register(sensor: ProximitySensor) : void
+    -isPersonClose() : boolean
+}
+
+class TimedDoor implements Door, TimerClient {
+    -_locked : boolean
+    -_opened : boolean
+    -TIME_OUT : int
+    +TimedDoor(timer: Timer)
+    +lock() : void
+    +unlock() : void
+    +open() : void
+    +close() : void
+    +timeOutCallback() : void
+}
+
+class Timer {
+    +register(timeOut: long, client: TimerClient) : void
+}
+
+
+Sensor --> ProximitySensor
+Timer --> TimerClient
+@enduml
